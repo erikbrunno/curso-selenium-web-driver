@@ -40,4 +40,34 @@ public class TesteCampoTreinamento {
 		driver.quit();
 	}
 
+	@Test
+	public void deveSelecionarRadioButtonSexo() {
+		// Informar a localizacao do driver caso ele nao exista no firefox
+		System.setProperty("webdriver.gecko.driver", "e:\\geckodriver-v0.28.0-win64\\geckodriver.exe");
+		// Inicializa o driver
+		WebDriver driver = new FirefoxDriver();
+		driver.get("file:///" + System.getProperty("user.dir") + "/src/main/resources/web/componentes.html");
+		driver.findElement(By.id("elementosForm:sexo:0")).click();
+
+		Assert.isTrue(driver.findElement(By.id("elementosForm:sexo:0")).isSelected());
+		
+		// Fecha o driver
+		driver.quit();
+	}
+	
+	@Test
+	public void deveSelecionarCheckboxComidaFavorita() {
+		// Informar a localizacao do driver caso ele nao exista no firefox
+		System.setProperty("webdriver.gecko.driver", "e:\\geckodriver-v0.28.0-win64\\geckodriver.exe");
+		// Inicializa o driver
+		WebDriver driver = new FirefoxDriver();
+		driver.get("file:///" + System.getProperty("user.dir") + "/src/main/resources/web/componentes.html");
+		driver.findElement(By.id("elementosForm:comidaFavorita:2")).click();
+
+		Assert.isTrue(driver.findElement(By.id("elementosForm:comidaFavorita:2")).isSelected());
+		
+		// Fecha o driver
+		driver.quit();
+	}
+	
 }
