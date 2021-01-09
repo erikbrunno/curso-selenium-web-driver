@@ -1,7 +1,6 @@
 package com.selenium.campotreinamento;
 
-import java.util.List;
-
+import org.junit.Ignore;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -120,7 +119,7 @@ public class TesteCampoTreinamento {
 	}
 
 	@Test
-	public void deveMarcarEDesmacarNoComboMultiplo() throws InterruptedException {
+	public void deveMarcarEDesmacarNoComboMultiplo() {
 		WebDriver driver = carregarDriver();
 		WebElement element = driver.findElement(By.id("elementosForm:esportes"));
 
@@ -140,6 +139,45 @@ public class TesteCampoTreinamento {
 		driver.quit();
 	}
 	
+	@Test
+	public void deveClicarNoBotaoCliqueMe() {
+		WebDriver driver = carregarDriver();
+		WebElement element = driver.findElement(By.id("buttonSimple"));
+		element.click();
+		
+		Assert.hasText("Obrigado", element.getAttribute("value"));
+		
+		// Fecha o driver
+		driver.quit();
+	}
+	
+	@Test
+	public void deveClicarNoLinkVoltar() {
+		WebDriver driver = carregarDriver();
+		driver.findElement(By.linkText("Voltar")).click();;
+
+		Assert.hasText("Voltou!", driver.findElement(By.id("resultado")).getText());
+		
+		// Fecha o driver
+		driver.quit();
+	}
+
+	@Test
+	public void deveBuscarTextosNaPagina() {
+		WebDriver driver = carregarDriver();
+		
+
+		//Essa estrategia nao é performatica, pois traz todos os texto visiveis dentro do body
+//		Assert.isTrue(driver.findElement(By.tagName("body")).getText().contains("Campo de Treinamento"));
+
+		Assert.hasText("Campo de Treinamento", driver.findElement(By.tagName("h3")).getText());
+		Assert.hasText("Cuidado onde clica, muitas armadilhas...", 
+				driver.findElement(By.className("facilAchar")).getText());
+		
+		// Fecha o driver
+		driver.quit();
+	}
+	
 	private WebDriver carregarDriver() {
 		System.setProperty("webdriver.gecko.driver", "e:\\geckodriver-v0.28.0-win64\\geckodriver.exe");
 		
@@ -147,6 +185,7 @@ public class TesteCampoTreinamento {
 		driver.get("file:///" + System.getProperty("user.dir") + "/src/main/resources/web/componentes.html");
 		return driver;
 	}
+	
 	
 	
 }
